@@ -6,6 +6,32 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import me.prototyp.database.Towar;
 public class DatabaseController {
+    // ZMIENNE TEXTOWE SQL
+    String sqlCreateTableGrupy = "CREATE TABLE IF NOT EXISTS `grupy` (\n" +
+            "  `grid` int(11) NOT NULL auto_increment,\n" +
+            "  `nazwa` varchar(30) NOT NULL,\n" +
+            "  PRIMARY KEY  (`grid`)\n" +
+            ")";
+    String sqlCreateTableVat = "CREATE TABLE IF NOT EXISTS `vat` (\n" +
+            "  `vid` int(11) NOT NULL auto_increment,\n" +
+            "  `stawka` varchar(6) NOT NULL,\n" +
+            "  `wartosc` decimal(5,2) NOT NULL,\n" +
+            "  PRIMARY KEY  (`vid`)\n" +
+            ")";
+    String sqlCreateTableTowar =
+            "CREATE TABLE IF NOT EXISTS `towary` (\n" +
+            "  `tid` int(11) NOT NULL auto_increment,\n" +
+            "  `nazwa` varchar(255) NOT NULL,\n" +
+            "  `vat` int(11) NOT NULL,\n" +
+            "  `jm` varchar(5) NOT NULL,\n" +
+            "  `netto` decimal(8,2) NOT NULL,\n" +
+            "  `brutto` decimal(8,2) NOT NULL,\n" +
+            "  `grupa` int(11) NOT NULL,\n" +
+            "  `barcod` varchar(13) NOT NULL,\n" +
+            "  PRIMARY KEY  (`tid`),\n" +
+            "  KEY `nazwa` (`nazwa`)\n" +
+            ")";
+    String sql_SELECT_INNER_JOIN = "SELECT towary.tid, towary.nazwa, vat.stawka AS 'vat', towary.jm, towary.netto, towary.brutto, grupy.nazwa AS 'grupa', towary.barcod FROM towary INNER JOIN grupy ON towary.grupa=grupy.grid INNER JOIN vat ON towary.vat=vat.vid;";
 
     private Connection connection = null;
 
@@ -17,7 +43,7 @@ public class DatabaseController {
             return;
         }
         if(createTable()){
-            System.out.println("Wszystko gra, tabela Users gotowa");
+            System.out.println("Wszystko gra, tabele Towar, Vat, Grupy gotowe");
         } else {
             System.out.println("Coś poszło nie tak, przy tworzeniu tabeli Users");
         }
@@ -42,13 +68,14 @@ public class DatabaseController {
     }
 
     private boolean createTable(){
-        String sql = "CREATE TABLE IF NOT EXISTS Users (\n" +
-                "id integer PRIMARY KEY AUTO_INCREMENT, \n" +
-                "username text NOT NULL,\n" +
-                "email text NOT NULL);";
+        String sql1 = sqlCreateTableGrupy;
+        String sql2 = sqlCreateTableTowar;
+        String sql3 = sqlCreateTableVat;
         try (Statement stmt = this.connection.createStatement()){
             //tworzymy tabelę
-            stmt.execute(sql);
+            stmt.execute(sql1);
+            stmt.execute(sql2);
+            stmt.execute(sql3);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
@@ -57,7 +84,7 @@ public class DatabaseController {
     }
 
     public boolean prtintRow(){
-        String sql = "SELECT * FROM 'towary'SELECT * FROM `towary` WHERE tid=1;";
+        String sql = sql_SELECT_INNER_JOIN;
         try {
             PreparedStatement pstmt = this.connection.prepareStatement(sql);
 
@@ -70,13 +97,13 @@ public class DatabaseController {
     }
 
     public ArrayList<Towar> getAllTowar() {
-        String sql = "SELECT * FROM `towary`;";
+        String sql = sql_SELECT_INNER_JOIN;
         ArrayList<Towar> towar = new ArrayList<>();
         try (Statement stmt = this.connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)){
             //iterujemy po wynikach
             while (rs.next()){
-                towar.add(new Towar(rs.getInt("tid"), rs.getString("nazwa"), rs.getInt("vat"), rs.getString("jm"), rs.getDouble("netto"), rs.getDouble("brutto"), rs.getInt("grupa"), rs.getString("barcod")));
+                towar.add(new Towar(rs.getInt("tid"), rs.getString("nazwa"), rs.getString("vat"), rs.getString("jm"), rs.getDouble("netto"), rs.getDouble("brutto"), rs.getString("grupa"), rs.getString("barcod")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -87,12 +114,28 @@ public class DatabaseController {
     public ObservableList<Towar> getAllTowarObservableList() {
         ObservableList<Towar> towarObservableList = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM `towary`;";
+        String sql = sql_SELECT_INNER_JOIN;
         try (Statement stmt = this.connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)){
             //iterujemy po wynikach
             while (rs.next()){
-                towarObservableList.add(new Towar(rs.getInt("tid"), rs.getString("nazwa"), rs.getInt("vat"), rs.getString("jm"), rs.getDouble("netto"), rs.getDouble("brutto"), rs.getInt("grupa"), rs.getString("barcod")));
+                towarObservableList.add(new Towar(rs.getInt("tid"), rs.getString("nazwa"), rs.getString("vat"), rs.getString("jm"), rs.getDouble("netto"), rs.getDouble("brutto"), rs.getString("grupa"), rs.getString("barcod")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return towarObservableList;
+    }
+
+    public ObservableList<Towar> getAllTowarObservableList(String SQL) {
+        ObservableList<Towar> towarObservableList = FXCollections.observableArrayList();
+        towarObservableList.clear();
+        String sql = SQL;
+        try (Statement stmt = this.connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
+            //iterujemy po wynikach
+            while (rs.next()){
+                towarObservableList.add(new Towar(rs.getInt("tid"), rs.getString("nazwa"), rs.getString("vat"), rs.getString("jm"), rs.getDouble("netto"), rs.getDouble("brutto"), rs.getString("grupa"), rs.getString("barcod")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

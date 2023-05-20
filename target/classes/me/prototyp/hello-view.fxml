@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="672.0" prefWidth="961.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.prototyp.HelloController">
+<VBox alignment="CENTER" prefHeight="673.0" prefWidth="1018.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.prototyp.HelloController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-        <Label fx:id="selectFrom" prefHeight="107.0" prefWidth="284.0" text="Sklep Stokrotka">
+        <Label fx:id="selectFrom" prefHeight="107.0" prefWidth="284.0" text="Sklep Pszczółka">
             <font>
                <Font size="30.0" />
             </font>
@@ -21,16 +21,16 @@
    <Separator prefHeight="11.0" prefWidth="827.0" />
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-         <TextField prefHeight="25.0" prefWidth="244.0" />
+         <TextField fx:id="searchField" prefHeight="25.0" prefWidth="244.0" />
          <Separator orientation="VERTICAL" prefHeight="200.0" />
-         <Button mnemonicParsing="false" text="Szukaj" />
+         <Button fx:id="searchButton" mnemonicParsing="false" text="Szukaj" onAction="#search"/>
       </children>
    </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-         <AnchorPane prefHeight="500.0" prefWidth="644.0">
+         <AnchorPane prefHeight="500.0" prefWidth="694.0">
             <children>
-               <TableView fx:id="towarTable" prefHeight="500" prefWidth="641.0">
+               <TableView fx:id="towarTable" prefHeight="500" prefWidth="694.0">
                  <columns>
                    <TableColumn fx:id="idColumn" text="ID" />
                    <TableColumn fx:id="nazwaColumn" text="NAZWA" />

@@ -3,14 +3,14 @@ package me.prototyp.database;
 public class Towar {
     private int id;
     private String nazwa;
-    private int vat;
+    private String vat;
     private String jm;
     private double netto;
     private double brutto;
-    private int grupa;
+    private String grupa;
     private String barcode;
 
-    public Towar(int id, String nazwa, int vat, String jm, double netto, double brutto, int grupa, String barcode) {
+    public Towar(int id, String nazwa, String vat, String jm, double netto, double brutto, String grupa, String barcode) {
 
         this.id = id;
         this.nazwa = nazwa;
@@ -18,6 +18,7 @@ public class Towar {
         this.jm = jm;
         this.netto = netto;
         this.brutto = brutto;
+        this.grupa = grupa;
         this.barcode = barcode;
 
     }
@@ -34,7 +35,7 @@ public class Towar {
         return this.nazwa;
     }
 
-    public int getVat(){
+    public String getVat(){
         return this.vat;
     }
 
@@ -50,7 +51,7 @@ public class Towar {
         return this.brutto;
     }
 
-    public int getGrupa(){
+    public String getGrupa(){
         return this.grupa;
     }
 
