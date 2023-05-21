@@ -17,18 +17,17 @@ import java.util.ArrayList;
 
 public class HelloController {
 
+    //SEARCH
     @FXML
     private TextField searchField;
-
     @FXML
     private Button searchButton;
-
     @FXML
     private Label selectFrom;
 
+    //TABLE
     @FXML
     private TableView<Towar> towarTable;
-
     @FXML
     private TableColumn<Towar, String> idColumn;
     @FXML
@@ -46,20 +45,42 @@ public class HelloController {
     @FXML
     private TableColumn<Towar, String> barcodeColumn;
 
+    //INSERT and DELETE
+
+    @FXML
+    private TextField id2Field;
+    @FXML
+    private TextField nazwa2Field;
+    @FXML
+    private TextField vat2Field;
+    @FXML
+    private TextField jm2Field;
+    @FXML
+    private TextField netto2Field;
+    @FXML
+    private TextField brutto2Field;
+    @FXML
+    private TextField grupa2Field;
+    @FXML
+    private TextField barcode2Field;
+
+
+
+    //POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
+    DatabaseController mysqlControl = new DatabaseController(
+            "localhost",
+            "3306",
+            "sklep",
+            "root",
+            ""
+    );
+    //KONIEC POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
+
     //ObservableList<Towar> towarObservableList = FXCollections.observableArrayList();
 
     public void refreshTable(){
         //towarObservableList.clear();
 
-        //POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
-        DatabaseController mysqlControl = new DatabaseController(
-                "localhost",
-                "3306",
-                "sklep",
-                "root",
-                ""
-        );
-        //KONIEC POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
 
         towarTable.setItems(mysqlControl.getAllTowarObservableList());
     }
@@ -80,16 +101,6 @@ public class HelloController {
         barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("barcode"));
 
 
-        //POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
-        DatabaseController mysqlControl = new DatabaseController(
-                "localhost",
-                "3306",
-                "sklep",
-                "root",
-                ""
-        );
-        //KONIEC POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
-
         towarTable.setItems(mysqlControl.getAllTowarObservableList());
     }
 
@@ -105,16 +116,6 @@ public class HelloController {
         barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("barcode"));
 
 
-        //POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
-        DatabaseController mysqlControl = new DatabaseController(
-                "localhost",
-                "3306",
-                "sklep",
-                "root",
-                ""
-        );
-        //KONIEC POŁĄCZENIE Z BAZĄ PBRANIE REKORDÓW
-
         towarTable.setItems(mysqlControl.getAllTowarObservableList(querry));
     }
 
@@ -125,5 +126,41 @@ public class HelloController {
         loadDate(searchQuerrySql);
         searchField.setText("");
     }
+
+
+    public void insertInto(){
+        String nazwa = nazwa2Field.getText();
+        String vat = vat2Field.getText();
+        String jm = jm2Field.getText();
+        String netto = netto2Field.getText();
+        String brutto = brutto2Field.getText();
+        String grupa = grupa2Field.getText();
+        String barcode = barcode2Field.getText();
+
+        mysqlControl.insertTowar(nazwa, vat, jm, netto, brutto, grupa, barcode);
+
+        nazwa2Field.setText("");
+        vat2Field.setText("");
+        jm2Field.setText("");
+        netto2Field.setText("");
+        brutto2Field.setText("");
+        grupa2Field.setText("");
+        barcode2Field.setText("");
+
+        loadDate();
+
+    }
+
+    public void deleteFrom(){
+        String id = id2Field.getText();
+
+        mysqlControl.deleteTowar(id);
+
+        id2Field.setText("");
+
+        loadDate();
+
+    }
+
 
 }

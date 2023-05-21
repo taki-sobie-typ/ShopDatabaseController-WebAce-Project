@@ -23,7 +23,7 @@
       <children>
          <TextField fx:id="searchField" prefHeight="25.0" prefWidth="244.0" />
          <Separator orientation="VERTICAL" prefHeight="200.0" />
-         <Button fx:id="searchButton" mnemonicParsing="false" text="Szukaj" onAction="#search"/>
+         <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" text="Szukaj" />
       </children>
    </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0">
@@ -55,47 +55,47 @@
                                  <Separator layoutX="10.0" layoutY="35.0" prefWidth="200.0" />
                                  <Label text="Nazwa">
                                     <graphic>
-                                       <TextField />
+                                       <TextField fx:id="nazwa2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator layoutX="10.0" layoutY="60.0" prefWidth="200.0" />
-                                 <Label layoutX="10.0" layoutY="10.0" text="Vat">
+                                 <Label layoutX="10.0" layoutY="10.0" text="Vat (1,2,3)">
                                     <graphic>
-                                       <TextField />
+                                       <TextField fx:id="vat2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator prefWidth="200.0" />
-                                 <Label layoutX="10.0" layoutY="10.0" text="JM">
+                                 <Label layoutX="10.0" layoutY="10.0" text="JM (SZ.)">
                                     <graphic>
-                                       <TextField />
+                                       <TextField fx:id="jm2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator layoutX="10.0" layoutY="63.0" prefWidth="200.0" />
                                  <Label layoutX="10.0" layoutY="60.0" text="Netto">
                                     <graphic>
-                                       <TextField />
+                                       <TextField fx:id="netto2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator layoutX="10.0" layoutY="63.0" prefWidth="200.0" />
                                  <Label layoutX="10.0" layoutY="85.0" text="Brutto">
                                     <graphic>
-                                       <TextField />
+                                       <TextField fx:id="brutto2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator layoutX="10.0" layoutY="91.0" prefWidth="200.0" />
-                                 <Label layoutX="10.0" layoutY="110.0" text="Grupa">
+                                 <Label layoutX="10.0" layoutY="110.0" text="Grupa (1-17)">
                                     <graphic>
-                                       <TextField />
+                                       <TextField fx:id="grupa2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator layoutX="10.0" layoutY="119.0" prefWidth="200.0" />
                                  <Label layoutX="10.0" layoutY="135.0" text="Barcode">
                                     <graphic>
-                                       <TextField />
+                                       <TextField fx:id="barcode2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator layoutX="10.0" layoutY="35.0" prefWidth="200.0" />
-                                 <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="DODAJ" />
+                                 <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="DODAJ" onAction="#insertInto" />
                               </children>
                            </VBox>
                         </children>
@@ -111,11 +111,11 @@
                                  <Separator prefWidth="200.0" />
                                  <Label text="ID">
                                     <graphic>
-                                       <TextField prefHeight="25.0" prefWidth="101.0" />
+                                       <TextField prefHeight="25.0" prefWidth="101.0" fx:id="id2Field" />
                                     </graphic>
                                  </Label>
                                  <Separator layoutX="10.0" layoutY="10.0" prefWidth="200.0" />
-                                 <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="USUN" />
+                                 <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="USUN" onAction="#deleteFrom" />
                               </children>
                            </VBox>
                         </children>

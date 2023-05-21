@@ -143,6 +143,37 @@ public class DatabaseController {
         return towarObservableList;
     }
 
+    public boolean insertTowar(String nazwa, String vat, String jm, String netto, String brutto, String grupa, String barcode) {
+        String sql = "INSERT INTO towary (towary.nazwa, towary.vat, towary.jm, towary.netto, towary.brutto, towary.grupa, towary.barcod) VALUES (?,?,?,?,?,?,?);";
+        try {
+            PreparedStatement pstmt = this.connection.prepareStatement(sql);
+            pstmt.setString(1, nazwa);
+            pstmt.setString(2, String.valueOf(vat));
+            pstmt.setString(3, jm);
+            pstmt.setString(4, String.valueOf(netto));
+            pstmt.setString(5, String.valueOf(brutto));
+            pstmt.setString(6, String.valueOf(grupa));
+            pstmt.setString(7, barcode);
+            int result = pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteTowar(String ID) {
+        String sql = "DELETE FROM towary WHERE tid="+ID+";";
+        try {
+            PreparedStatement pstmt = this.connection.prepareStatement(sql);
+            int result = pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     /*
     public boolean addUser(User user) {
         String sql = "INSERT INTO Users (username, email) VALUES (?,?)";
