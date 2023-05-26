@@ -1,12 +1,13 @@
-module me.prototyp {
+module me.shop {
     requires javafx.controls;
     requires javafx.fxml;
+    requires mysql.connector.java;
     requires java.sql;
 
 
-    opens me.prototyp to javafx.fxml;
-    opens me.prototyp.database to javafx.fxml;
+    opens me.shop to javafx.fxml;
+    opens me.shop.database to javafx.fxml;
 
-    exports me.prototyp;
-    exports me.prototyp.database;
+    exports me.shop;
+    exports me.shop.database;
 }

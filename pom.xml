@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>me</groupId>
-  <artifactId>Prototyp</artifactId>
+  <artifactId>shop</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Prototyp</name>
+  <name>shop</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,16 +25,6 @@
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-compiler-plugin</artifactId>
       <version>3.11.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-dependency-plugin</artifactId>
-      <version>3.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.xerial</groupId>
-      <artifactId>sqlite-jdbc</artifactId>
-      <version>3.40.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -135,7 +125,7 @@
             <id>default-cli</id>
             <configuration>
               <mainClass>
-                me.webace.zajecia6/SuperStart
+                me.shop/me.shop.SuperStart
               </mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
@@ -161,7 +151,7 @@
           <!-- ... -->
           <archive>
             <manifest>
-              <mainClass>SuperStart</mainClass>
+              <mainClass>me.shop.SuperStart</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>

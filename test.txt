@@ -1,0 +1,1 @@
+* Required filename-based automodules detected: [mysql-connector-java-8.0.28.jar]. Please don't publish this project to a public artifact repository! *
