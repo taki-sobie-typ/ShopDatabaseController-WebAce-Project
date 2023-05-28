@@ -4,7 +4,7 @@
 ***
 #### Requierments:
 * Running Xampp (Apache, Mysql, Tomcat(not required))
-* Existing "shop" database in phpmyadmin (no further configuration of database needed)
+* Existing "sklep" database in phpmyadmin (no further configuration of database needed)
 * Project is made with Java 19.0.2
 ***
 The latest available release should be working just fine!
