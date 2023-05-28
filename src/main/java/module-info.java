@@ -1,7 +1,7 @@
 module me.shop {
     requires javafx.controls;
     requires javafx.fxml;
-    requires mysql.connector.java;
+    requires mysql.connector.j;
     requires java.sql;
 
 
